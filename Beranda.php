@@ -107,7 +107,7 @@ $resultAllBook = mysqli_query($conn, $queryAllBook);
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Jenis </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#" onclick="clearFilter()"> All </a></li>
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('Sayuran')">Sayuran</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="filterGenre('Sayur')">Sayuran</a></li>
                             <li><a class="dropdown-item" href="#" onclick="filterGenre('Buah')">Buah</a></li>
                             <li><a class="dropdown-item" href="#" onclick="filterGenre('Bunga')">Bunga</a></li>
 
