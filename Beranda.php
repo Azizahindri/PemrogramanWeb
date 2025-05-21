@@ -5,7 +5,7 @@ $query = "
     SELECT 
         b.id_book,
         b.title, 
-        b.author, 
+        b.price, 
         ROUND(AVG(br.rating), 1) AS average_rating
     FROM 
         crud_041_book b
@@ -187,7 +187,7 @@ $resultAllBook = mysqli_query($conn, $queryAllBook);
                 <img src="<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                 <hr>
                 <h5><?= htmlspecialchars($row['title']) ?></h5>
-                <p> Rp.<?= htmlspecialchars($row['author']) ?></p>
+                <p> Rp.<?= number_format($row['price'], 0, ',', '.') ?></p>
             </div>
 
         <?php endwhile; ?>

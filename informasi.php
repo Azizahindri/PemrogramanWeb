@@ -60,7 +60,7 @@ if (isset($_GET['id_book'])) {
             <img src="<?= htmlspecialchars($data['image_url']) ?>" alt="<?= htmlspecialchars($data['title']) ?>" class="image-detail">
         </div>
         <div class="col-md-6 desc-box">
-            <p><strong>Harga:</strong> Rp.<?= htmlspecialchars($data['author']) ?></p>
+            <p><strong>Harga:</strong> Rp.<?= htmlspecialchars($data['price']) ?></p>
             <p><strong>Deskripsi:</strong></p>
             <p><?= nl2br(htmlspecialchars($data['description'])) ?></p>
             <a href="form.php?id_book=<?= urlencode($data['id_book']) ?>" class="btn btn-success">Beri Review</a>
