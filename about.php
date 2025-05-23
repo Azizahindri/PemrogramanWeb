@@ -1,254 +1,196 @@
 <?php
 include 'database/db.php';
-
 $query = "SELECT * FROM crud_041_book";
 $result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang Kami - BookView</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: rgb(28, 79, 45);
-            font-family: 'Arial', sans-serif;
-            color: #fafcff;
-        }
-        .book-item {
-            border: 1px solid #d3bbbbc6;
-            padding: 15px;
-            margin: 10px;
-            text-align: center;
-            border-radius: 8px;
-            display: none;
-        }
-        .book-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .book-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .navbar {
-            margin-bottom: 20px;
-        }
-
-        .container {
-            margin-top: 50px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-
-        .about-text {
-            font-size: 1.2rem;
-            color: #fafcff;
-            line-height: 1.8;
-            text-align: center;
-            text-align: justify;
-        }
-
-        .about-image {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-
-        .about-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .team-member {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .team-member img {
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 120px;
-            height: 120px;
-        }
-
-        .team-member h5 {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #fafcff;
-            margin-top: 10px;
-        }
-
-        .team-member p {
-            font-size: 1rem;
-            color: #ddd;
-        }
-
-        .footer {
-            background-color:rgb(255, 255, 255);
-            color: green;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        .footer a {
-            color:rgb(28, 80, 23);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .navbar {
-            background-color: #ffffff;
-        }
-        .navbar-nav .nav-link {
-            color: rgb(33, 80, 40) !important; 
-        }
-        .navbar-nav .nav-link:hover {
-            color: rgb(0, 0, 0) !important; 
-        }
-        .navbar-nav .nav-link.active {
-            color: rgb(28, 97, 37) !important;
-        }
-
-        /* Ensure the dropdown is clickable */
-        .dropdown-menu {
-            z-index: 1050; /* Make sure it's on top */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tentang Kami - Freshure</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f6fff8;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .navbar-brand {
+      color: #2b9348 !important;
+      font-weight: bold;
+    }
+    .nav-link {
+      color: #2b9348 !important;
+      font-weight: 500;
+    }
+    .nav-link.active, .nav-link:hover {
+      color: #40916c !important;
+    }
+    .section-title {
+      color: #1b4332;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .book-item {
+      background-color: #ffffff;
+      border: 1px solid #dbe9e2;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .book-item img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .about-section {
+      background-color: #e9f5ec;
+      padding: 40px 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    .about-text {
+      color: #2d6a4f;
+      text-align: justify;
+    }
+    .team-member img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .team-member h5 {
+      margin-top: 10px;
+      color: #081c15;
+    }
+    footer {
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      color: #40916c;
+    }
+    footer a {
+      color: #1b4332;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="color: green;">Freshure</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="Beranda.php">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="about.php">Tentang Kami</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Jenis </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('fiksi')">Fiksi</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('non-fiksi')">Non-Fiksi</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('romansa')">Romansa</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('fantasi')">Fantasi</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('misteri')">Misteri</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('sejarah')">Sejarah</a></li>
-                        </ul>
-                    </li>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <a class="navbar-brand" href="Beranda.php">Freshure</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link active" href="Beranda.php">Beranda</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.php">Tentang Kami</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Jenis </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#" onclick="clearFilter()">All</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterGenre('Sayuran')">Sayur</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterGenre('Buah')">Buah</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterGenre('Bunga')">Bunga</a></li>
                 </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-5">
-        <?php while($row = mysqli_fetch_assoc($result)): ?>
-            <div class="book-item <?= htmlspecialchars($row['genre']) ?> col-md-3">
-                <img src="<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                <hr>
-                <h5><?= htmlspecialchars($row['title']) ?></h5>
-                <p>Penulis: <?= htmlspecialchars($row['author']) ?></p>
-                <a href="form.php"><p>Isi Review</p></a>
-                <details>
-                    <summary>Deskripsi buku:</summary>
-                    <p align="justify"><?= nl2br(htmlspecialchars($row['description'])) ?></p>
-                </details>
-                <a href="Review.php?id_book=<?= urlencode($row['id_book']) ?>" class='btn btn-primary btn-sm'>Review</a>
-            </div>
-        <?php endwhile; ?>
+            </li>
+        </ul>
     </div>
-    
-    <div class="container">
-        <div class="about-header">
-            <h2 class="section-title"> Freshure </h2>
-        </div>
+  </div>
+</nav>
 
-        <section>
-                <div class="col-md-6">
-                    <p class="about-text">
-                        Selamat datang di Freshure, tempat di mana tanaman hidroponik berkualitas tinggi bertemu dengan para pecinta pertanian modern!
-                    </p>
-                    <p class="about-text">
-                        Kami menghadirkan beragam pilihan sayur segar, buah lezat, dan bunga indah, semuanya ditanam dengan metode hidroponik yang ramah lingkungan dan efisien. Hidroponik memungkinkan tanaman tumbuh lebih sehat, bebas dari pestisida berbahaya, serta menghasilkan panen berkualitas tanpa bergantung pada tanah.
-                    </p>
-                    <p class="about-text">
-                        Dengan komitmen untuk menyediakan produk terbaik, kami bekerja sama dengan petani hidroponik berpengalaman serta menerapkan standar ketat dalam setiap tahap pertumbuhan tanaman. Kami percaya bahwa makanan sehat dan lingkungan yang lebih hijau adalah masa depan, dan kami ingin menjadi bagian dari perjalanan Anda menuju gaya hidup yang lebih sehat dan berkelanjutan.                    </p>
-                    <p class="about-text">
-                        Temukan keindahan dan manfaat tanaman hidroponik bersama kami, dan rasakan perbedaannya! 🌿
-                    </p>
-                </div>
-            </div>
-        </section>
+<div class="container my-5">
+  <h2 class="section-title text-center">Tentang Freshure</h2>
+  <div class="about-section">
+    <p class="about-text">
+      Selamat datang di <strong>Freshure</strong>, tempat di mana tanaman hidroponik berkualitas tinggi bertemu dengan para pecinta pertanian modern! Kami menghadirkan beragam pilihan sayur segar, buah lezat, dan bunga indah yang ditanam secara ramah lingkungan.
+    </p>
+    <p class="about-text">
+      Kami percaya bahwa makanan sehat dan lingkungan yang lebih hijau adalah masa depan. Bergabunglah dengan kami dalam perjalanan menuju gaya hidup sehat dan berkelanjutan 🌱
+    </p>
+  </div>
 
-        <section>
-            <h3 class="section-title text-center">Tim Kami</h3>
-            <div class="row">
-                <div class="col-md-4 team-member">
-                    <img src="images/mh.jpg" alt="Xu Minghao">
-                    <h5>Xu Minghao</h5>
-                    <p>CEO & Founder</p>
-                </div>
-                <div class="col-md-4 team-member">
-                    <img src="images/dk.jpg" alt="Lee Dokyeom">
-                    <h5>Lee Dokyeom</h5>
-                    <p>Creative Director</p>
-                </div>
-                <div class="col-md-4 team-member">
-                    <img src="images/sc.jpg" alt="Choi Seungcheol">
-                    <h5>Choi Seungcheol</h5>
-                    <p>Lead Developer</p>
-                </div>
-            </div>
-        </section>
+  <h3 class="section-title text-center">Tim Kami</h3>
+  <div class="row justify-content-center">
+    <div class="col-md-3 text-center team-member">
+      <img src="images/mh.jpg" alt="Xu Minghao">
+      <h5>Xu Minghao</h5>
+      <p>CEO & Founder</p>
     </div>
+    <div class="col-md-3 text-center team-member">
+      <img src="images/dk.jpg" alt="Lee Dokyeom">
+      <h5>Lee Dokyeom</h5>
+      <p>Creative Director</p>
+    </div>
+    <div class="col-md-3 text-center team-member">
+      <img src="images/sc.jpg" alt="Choi Seungcheol">
+      <h5>Choi Seungcheol</h5>
+      <p>Lead Developer</p>
+    </div>
+  </div>
 
-    <footer class="footer">
-        <p>&copy; 2025 BookView. All Rights Reserved.</p>
-        <p>
-            <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
-        </p>
-    </footer>
+  <!-- Buku: Hanya Tampil Setelah Filter Dipilih -->
+  <div id="bookSection" style="display: none;">
+    <h3 class="section-title text-center mt-5">Daftar Buku</h3>
+    <div class="row" id="bookList">
+      <?php mysqli_data_seek($result, 0); while($row = mysqli_fetch_assoc($result)): ?>
+        <div class="col-md-4 book-item <?= htmlspecialchars($row['genre']) ?>">
+          <div class="book-item">
+            <img src="<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+            <h5><?= htmlspecialchars($row['title']) ?></h5>
+            <p><strong>Penulis:</strong> <?= htmlspecialchars($row['price']) ?></p>
+            <details>
+              <summary>Deskripsi buku</summary>
+              <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
+            </details>
+            <a href="Review.php?id_book=<?= urlencode($row['id_book']) ?>" class="btn btn-success btn-sm mt-2">Review</a>
+          </div>
+        </div>
+      <?php endwhile; ?>
+    </div>
+  </div>
+</div>
 
-    <!-- Perbaiki urutan script -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function filterGenre(genre) {
-            var bookItems = document.querySelectorAll('.book-item');
-            bookItems.forEach(function(book) {
-                if (book.classList.contains(genre)) {
-                    book.style.display = 'block';
-                } else {
-                    book.style.display = 'none';
-                }
-            });
-        }
+<footer>
+  <p>&copy; 2025 Freshure. Semua Hak Dilindungi.</p>
+  <p><a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a></p>
+</footer>
 
-        window.onload = function() {
-            var bookItems = document.querySelectorAll('.book-item');
-            bookItems.forEach(function(book) {
-                book.style.display = 'none';
-            });
-        };
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function filterGenre(genre) {
+  const section = document.getElementById("bookSection");
+  section.style.display = 'block';
+  const items = document.querySelectorAll("#bookList .book-item");
+  items.forEach(item => {
+    item.style.display = item.classList.contains(genre) ? 'block' : 'none';
+  });
+}
+
+function clearFilter() {
+  const section = document.getElementById("bookSection");
+  section.style.display = 'block';
+  const items = document.querySelectorAll("#bookList .book-item");
+  items.forEach(item => {
+    item.style.display = 'block';
+  });
+}
+</script>
 </body>
 </html>

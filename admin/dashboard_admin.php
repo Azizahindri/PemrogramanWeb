@@ -93,7 +93,7 @@ if (mysqli_num_rows($checkTrans) > 0) {
     <a href="produk_list.php"><i class="fas fa-box"></i> Produk</a>
     <a href="penjualan_list.php"><i class="fas fa-file-invoice-dollar"></i> Transaksi</a>
     <a href="user_list.php"><i class="fas fa-users"></i> Pengguna</a>
-    <a href="logout.php" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a href="/newpeng/logout_adminseller.php" class="text-danger"><i class="fas fa-sign-out-alt"></i> >Logout</a>
 </div>
 
 <div class="content">

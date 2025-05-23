@@ -34,95 +34,133 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sign Up</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Daftar | Freshure</title>
+
+    <!-- Bootstrap & Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         body {
-            background-color: rgb(17, 85, 45);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #26734d, #a1efbc);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
         }
-        .signup-container {
-            background: white;
-            padding: 25px 20px;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
-            width: 320px;
-            color: #333;
-        }
-        .signup-container h2 {
-            color: brown;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-        label {
-            font-size: 14px;
-            color: #000;
-        }
-        .form-control {
-            font-size: 14px;
-        }
-        .btn-signup {
-            background: rgb(81, 121, 91);
-            color: white;
-            padding: 8px;
+
+        .signup-box {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             width: 100%;
-            border-radius: 5px;
-            transition: 0.3s;
-            font-weight: bold;
-            border: none;
-            font-size: 15px;
-            cursor: pointer;
+            max-width: 420px;
+            animation: slideUp 0.8s ease-in-out;
         }
-        .btn-signup:hover {
-            background: rgb(3, 83, 18);
-        }
-        .signup-container p {
-            font-size: 13px;
+
+        h2 {
             text-align: center;
+            color: #2e7d5a;
+            font-weight: 700;
+            margin-bottom: 25px;
         }
-        .mb-3 label.form-label {
-            margin-bottom: 4px;
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 10px;
+            border: 1.5px solid #ccc;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #2e7d5a;
+            box-shadow: 0 0 0 0.2rem rgba(46, 125, 90, 0.25);
+        }
+
+        .btn-signup {
+            background-color: #2e7d5a;
+            border: none;
+            color: #fff;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .btn-signup:hover {
+            background-color: #239b6c;
+        }
+
+        .footer-text {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            text-align: center;
+            color: #555;
+        }
+
+        .footer-text a {
+            color: #2e7d5a;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="signup-container">
-        <h2>Sign Up</h2>
+    <div class="signup-box">
+        <h2><i class="fa-solid fa-user-plus me-2"></i>Sign Up</h2>
         <form action="signup.php" method="POST">
-            <div class="mb-2">
-                <label class="form-label" for="first_name">First Name</label>
+            <div class="mb-3">
+                <label class="form-label" for="first_name">Nama Depan</label>
                 <input type="text" id="first_name" name="first_name" class="form-control" required />
             </div>
-            <div class="mb-2">
-                <label class="form-label" for="last_name">Last Name</label>
+            <div class="mb-3">
+                <label class="form-label" for="last_name">Nama Belakang</label>
                 <input type="text" id="last_name" name="last_name" class="form-control" required />
             </div>
-            <div class="mb-2">
+            <div class="mb-3">
                 <label class="form-label" for="email">Email</label>
                 <input type="email" id="email" name="email" class="form-control" required />
             </div>
-            <div class="mb-2">
+            <div class="mb-3">
                 <label class="form-label" for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" required />
             </div>
-            <div class="mb-3">
-                <label class="form-label">Daftar Sebagai:</label><br />
-                <input type="radio" id="seller" name="role" value="seller" required />
-                <label for="seller">Penjual</label><br />
-                <input type="radio" id="user" name="role" value="user" required />
-                <label for="user">Pembeli</label>
+            <div class="mb-4">
+                <label class="form-label">Daftar sebagai</label><br />
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="seller" name="role" value="seller" required />
+                    <label class="form-check-label" for="seller">Penjual</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="user" name="role" value="user" required />
+                    <label class="form-check-label" for="user">Pembeli</label>
+                </div>
             </div>
             <button type="submit" class="btn-signup">Daftar</button>
         </form>
-        <p class="mt-3">
+        <div class="footer-text mt-3">
             Sudah punya akun? <a href="login2.php">Login di sini</a>
-        </p>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

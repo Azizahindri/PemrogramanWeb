@@ -1,6 +1,21 @@
 <?php
+session_start();
 include 'database/db.php'; 
+$username = '';
 
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $stmt = $conn->prepare("SELECT first_name, last_name FROM users WHERE id = ?");
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($first_name, $last_name);
+    $stmt->fetch();
+    $username = $first_name . ' ' . $last_name;
+    $stmt->close();
+}
 $query = "
     SELECT 
         b.id_book,
@@ -32,10 +47,16 @@ $resultAllBook = mysqli_query($conn, $queryAllBook);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
-            background-color: rgb(28, 79, 45);
+            background-color: rgb(255, 255, 255);
+            margin: 0;
+            height: 50vh;
+            background-image: url("images/bs.png"); /* Ganti dengan nama atau URL gambarmu */
+            background-size: cover;
+            background-repeat: no-repeat;SD
+            background-position: center;
         }
         .book-item {
-            border: 1px solid #d3bbbbc6;
+            border: 1px solid #bbd3bb;
             padding: 15px;
             margin: 10px;
             text-align: center;
@@ -72,26 +93,26 @@ $resultAllBook = mysqli_query($conn, $queryAllBook);
             border-radius: 10px;
         }
         * {
-            color: whitesmoke;
+            color: green;
         }
         .navbar {
-            background-color: #ffffff;
+            background-color:rgb(62, 116, 57);
         }
         .navbar-nav .nav-link {
-            color: rgb(33, 80, 40) !important; 
+            color: rgb(255, 255, 255) !important; 
         }
         .navbar-nav .nav-link:hover {
             color: rgb(0, 0, 0) !important; 
         }
         .navbar-nav .nav-link.active {
-            color: rgb(28, 97, 37) !important;
+            color: rgb(255, 255, 255) !important;
         }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="color: green;">Freshure</a>
+            <a class="navbar-brand" href="#" style="color: white;">Freshure</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -107,22 +128,29 @@ $resultAllBook = mysqli_query($conn, $queryAllBook);
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Jenis </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#" onclick="clearFilter()"> All </a></li>
-                            <li><a class="dropdown-item" href="#" onclick="filterGenre('Sayur')">Sayuran</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="filterGenre('Sayuran')">Sayur</a></li>
                             <li><a class="dropdown-item" href="#" onclick="filterGenre('Buah')">Buah</a></li>
                             <li><a class="dropdown-item" href="#" onclick="filterGenre('Bunga')">Bunga</a></li>
 
                         </ul>
                     </li>
-                <li class="nav-item"> 
-                    <a class = "nav-link" href = "login2.php" > <img src="images/log.png" alt="Choi Seungcheol"></a>
-                </li>
-                </ul>
+                    <li class="nav-item">
+                        <?php if ($username): ?>
+                            <a class="nav-link" href="logout.php">logout</a>
+                        <?php else: ?>
+                            <a class="nav-link" href="login2.php">login</a>
+                        <?php endif; ?>
+                    </li>
+                 </ul>
             </div>
         </div>
     </nav>
-    
 
     <div class="container mt-5">
+             <?php if ($username): ?>
+            <span>Hai, <?= htmlspecialchars($first_name) ?>!</span>
+            <?php else: ?>
+             <?php endif; ?>
         <h1 align="center" style="color: brown; font-family: Poppins"><b>  Freshure </b> </h1>
         <p> Panen Segar Setiap Hari! Pilih Sayur dan Buah Hidroponik Berkualitas untuk Hidangan Sehatmu!" </p>
         <hr>
@@ -187,7 +215,7 @@ $resultAllBook = mysqli_query($conn, $queryAllBook);
                 <img src="<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                 <hr>
                 <h5><?= htmlspecialchars($row['title']) ?></h5>
-                <p> Rp.<?= number_format($row['price'], 0, ',', '.') ?></p>
+                <p> Rp.<?= htmlspecialchars($row['price']) ?></p>
             </div>
 
         <?php endwhile; ?>

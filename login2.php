@@ -4,11 +4,10 @@ session_start();
 include 'database/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['username']); // nama input form
+    $email = trim($_POST['username']);
     $password = $_POST['password'];
 
     if (!empty($email) && !empty($password)) {
-        // ✅ Ambil first_name dari database
         $stmt = $conn->prepare("SELECT id, first_name, password, role FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -19,11 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (password_verify($password, $user['password'])) {
                 $_SESSION['user_id']    = $user['id'];
-                $_SESSION['first_name'] = $user['first_name']; // ✅ penting untuk dashboard
+                $_SESSION['first_name'] = $user['first_name'];
                 $_SESSION['role']       = $user['role'];
-                $_SESSION['email']      = $email; // opsional, untuk pengecekan
+                $_SESSION['email']      = $email;
 
-                // ✅ Arahkan ke dashboard berdasarkan role
                 if ($user['role'] === 'admin') {
                     header("Location: admin/dashboard_admin.php");
                 } elseif ($user['role'] === 'seller') {
@@ -38,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "<script>alert('Email tidak ditemukan'); window.location.href='login2.php';</script>";
         }
-
         $stmt->close();
     } else {
         echo "<script>alert('Email dan Password harus diisi'); window.location.href='login2.php';</script>";
@@ -48,113 +45,131 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <title>Login | Freshure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         body {
-            background-color: rgb(28, 79, 45);
-            color: whitesmoke;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg,rgb(35, 122, 86),rgb(221, 235, 223));
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: 'Poppins', sans-serif;
+            justify-content: center;
+            margin: 0;
         }
-        .login-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 400px;
+
+        .login-box {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 420px;
+            animation: fadeIn 1s ease-in-out;
         }
-        .login-container h2 {
-            color: brown;
-            margin-bottom: 20px;
+
+        .login-box h2 {
+            margin-bottom: 30px;
+            color: #2f7f5e;
+            font-weight: 700;
         }
+
+        .form-label {
+            font-weight: 600;
+        }
+
         .form-control {
-            border: 2px solid #d3bbbb;
-            border-radius: 6px;
-        }
-        .btn-login {
-            background:rgb(81, 121, 91);
-            color: white;
-            padding: 10px;
-            width: 100%;
-            border-radius: 5px;
+            border-radius: 10px;
+            padding: 12px;
+            border: 1.5px solid #ccc;
             transition: 0.3s;
-            font-weight: bold;
         }
+
+        .form-control:focus {
+            border-color: #2f7f5e;
+            box-shadow: 0 0 0 0.2rem rgba(47, 127, 94, 0.25);
+        }
+
+        .btn-login {
+            background-color: #2f7f5e;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            color: #fff;
+            font-weight: 600;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
         .btn-login:hover {
-            background:rgb(56, 217, 86);
+            background-color: #249e72;
         }
-        .navbar {
-            background-color: #ffffff;
-            padding: 10px 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
-        .navbar .navbar-brand {
-            color: crimson;
-            font-weight: bold;
-        }
-        .navbar-nav .nav-link {
-            color: rgb(17, 85, 45) !important;
-        }
-        .navbar-nav .nav-link:hover {
-            color: rgb(0, 0, 0) !important;
-        }
-        .navbar-nav .nav-link.active {
-            color: rgb(30, 93, 23) !important;
-        }
-        footer {
-            background-color: transparent;
-            color: rgb(255, 255, 255);
-            padding: 15px;
+
+        .footer-text {
+            margin-top: 20px;
             text-align: center;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .footer-text a {
+            color: #2f7f5e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        .icon-box {
+            text-align: center;
+            font-size: 48px;
+            color: #2f7f5e;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="Beranda.php">Freshure</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
 
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="login2.php" method="POST">
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="text" name="username" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-login">Login</button>
-        </form>
-        <p class="mt-3">Belum punya akun? <a href="signup.php">Daftar di sini</a></p>
+<div class="login-box">
+    <div class="icon-box">
+        <i class="fas fa-leaf"></i>
     </div>
+    <h2 class="text-center">Login Freshure</h2>
+    <form action="login2.php" method="POST">
+        <div class="mb-3">
+            <label for="username" class="form-label">Email</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required>
+        </div>
+        <button type="submit" class="btn btn-login">Masuk</button>
+    </form>
+    <div class="footer-text mt-3">
+        Belum punya akun? <a href="signup.php">Daftar sekarang</a>
+    </div>
+</div>
 
-    <footer>
-        <p>&copy; 2025 Semua Hak Dilindungi</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
