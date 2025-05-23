@@ -8,7 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     if (!empty($email) && !empty($password)) {
-        $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE email = ?");
+        // ✅ Ambil first_name dari database
+        $stmt = $conn->prepare("SELECT id, first_name, password, role FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -17,11 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $result->fetch_assoc();
 
             if (password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['role'] = $user['role'];
+                $_SESSION['user_id']    = $user['id'];
+                $_SESSION['first_name'] = $user['first_name']; // ✅ penting untuk dashboard
+                $_SESSION['role']       = $user['role'];
+                $_SESSION['email']      = $email; // opsional, untuk pengecekan
 
+                // ✅ Arahkan ke dashboard berdasarkan role
                 if ($user['role'] === 'admin') {
                     header("Location: admin/dashboard_admin.php");
+                } elseif ($user['role'] === 'seller') {
+                    header("Location: seller/dashboard_seller.php");
                 } else {
                     header("Location: beranda.php");
                 }
@@ -41,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
