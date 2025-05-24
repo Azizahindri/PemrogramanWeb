@@ -194,7 +194,7 @@ $total_products = $products->num_rows;
         <a href="?page=products" class="<?= (isset($_GET['page']) && $_GET['page'] == 'products') ? 'active' : '' ?>"><i class="fas fa-box"></i> Produk</a>
         <a href="?page=reviews" class="<?= (isset($_GET['page']) && $_GET['page'] == 'reviews') ? 'active' : '' ?>"><i class="fas fa-star"></i> Review</a>
         <a href="?page=orders" class="<?= (isset($_GET['page']) && $_GET['page'] == 'orders') ? 'active' : '' ?>"><i class="fas fa-receipt"></i> Pemesanan</a>
-        <a href="?page=profil" class="<?= (isset($_GET['page']) && $_GET['page'] == 'profil') ? 'active' : '' ?>"><i class="fas fa-receipt"></i> Profil</a>
+        <a href="?page=profil" class="<?= (isset($_GET['page']) && $_GET['page'] == 'profil') ? 'active' : '' ?>"><i class="fas fa-user-circle"></i> Profil</a>
     </div>
 
     <div class="content">
@@ -236,34 +236,18 @@ $total_products = $products->num_rows;
             </section>
             <?php
         } elseif ($page == 'products') {
-            ?>
-            <div class="header d-flex justify-content-between align-items-center">
-                <h2>Produk Saya (<?= $total_products ?>)</h2>
-                <a href="add_product.php" class="btn btn-success">Tambah Produk Baru</a>
-            </div>
-            <?php if ($total_products > 0): ?>
-                <?php 
-                $products->data_seek(0); 
-                while ($product = $products->fetch_assoc()): ?>
-                    <div class="product-card">
-                        <h5><?= htmlspecialchars($product['idnama_tanaman']) ?></h5>
-                        <p>Jenis: <?= htmlspecialchars($product['jenis']) ?></p>
-                        <p>Harga: Rp <?= number_format($product['price'], 0, ',', '.') ?></p>
-                        <p>Stok: <?= $product['stock'] ?></p>
-                        <a href="edit_product.php?id=<?= $product['id'] ?>" class="btn btn-primary btn-sm btn-action">Edit</a>
-                        <a href="delete_product.php?id=<?= $product['id'] ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Yakin hapus produk ini?')">Hapus</a>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>Belum ada produk. Silakan tambah produk baru.</p>
-            <?php endif; ?>
-            <?php
+            include 'products.php';
         } elseif ($page == 'reviews') {
-            $sql_reviews = "SELECT r.*, p.idnama_tanaman FROM reviews r JOIN crud_041_book p ON r.product_id = p.id WHERE p.seller_id = ?";
-            $stmt_r = $conn->prepare($sql_reviews);
-            $stmt_r->bind_param("i", $seller_id);
-            $stmt_r->execute();
-            $reviews = $stmt_r->get_result();
+            $sql_reviews = "
+                SELECT r.*, p.title 
+                FROM crud_041_book_reviews r 
+                JOIN crud_041_book p ON r.book_id = p.id 
+                WHERE p.seller_id = ?
+            ";
+            $stmt_reviews = $conn->prepare($sql_reviews);
+            $stmt_reviews->bind_param("i", $seller_id);
+            $stmt_reviews->execute();
+            $reviews = $stmt_reviews->get_result();
             ?>
             <div class="header">
                 <h2>Review Produk Saya</h2>
@@ -271,7 +255,7 @@ $total_products = $products->num_rows;
             <?php if ($reviews->num_rows > 0): ?>
                 <?php while ($review = $reviews->fetch_assoc()): ?>
                     <div class="product-card">
-                        <strong>Produk: <?= htmlspecialchars($review['idnama_tanaman']) ?></strong><br>
+                        <strong>Produk: <?= htmlspecialchars($review['title']) ?></strong><br>
                         <small>oleh: <?= htmlspecialchars($review['reviewer_name'] ?? 'Anonim') ?></small><br>
                         <p><?= htmlspecialchars($review['comment']) ?></p>
                         <p>Rating: <?= $review['rating'] ?>/5</p>

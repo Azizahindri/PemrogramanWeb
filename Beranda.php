@@ -27,7 +27,7 @@ $query = "
     LEFT JOIN 
         crud_041_book_reviews br ON b.id_book = br.book_id
     GROUP BY 
-        b.id_book
+        b.id_book, b.title, b.price
     ORDER BY 
         average_rating DESC;
 ";
