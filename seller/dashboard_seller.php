@@ -3,7 +3,7 @@ session_start();
 include '../database/db.php';
 
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
-    header("Location: ../login2.php");
+    header("Location: log/login2.php");
     exit();
 }
 

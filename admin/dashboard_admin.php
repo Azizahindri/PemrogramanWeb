@@ -4,7 +4,7 @@ include '../database/db.php';
 
 // Cek apakah user admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../login2.php");
+    header("Location: log/login2.php");
     exit();
 }
 
@@ -93,7 +93,7 @@ if (mysqli_num_rows($checkTrans) > 0) {
     <a href="produk_list.php"><i class="fas fa-box"></i> Produk</a>
     <a href="penjualan_list.php"><i class="fas fa-file-invoice-dollar"></i> Transaksi</a>
     <a href="user_list.php"><i class="fas fa-users"></i> Pengguna</a>
-    <a href="/newpeng/logout_adminseller.php" class="text-danger"><i class="fas fa-sign-out-alt"></i> >Logout</a>
+    <a href="../log/logout_adminseller.php" class="text-danger"><i class="fas fa-sign-out-alt"></i> >Logout</a>
 </div>
 
 <div class="content">
