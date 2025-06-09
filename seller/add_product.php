@@ -16,20 +16,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenis = trim($_POST['genre'] ?? '');
     $price = floatval($_POST['price'] ?? 0);
     $stock = intval($_POST['stock'] ?? 0);
+    $description = trim($_POST['description'] ?? '');
 
     if (!$title || !$jenis || $price <= 0 || $stock < 0) {
         $error = "Mohon isi semua data dengan benar.";
     } else {
-        $sql = "INSERT INTO crud_041_book (seller_id, title, genre, price, stock) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issdi", $seller_id, $title, $jenis, $price, $stock);
+        // Proses upload gambar
+        $image_url = null;
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $fileTmpPath = $_FILES['image']['tmp_name'];
+            $fileName = $_FILES['image']['name'];
+            $fileSize = $_FILES['image']['size'];
+            $fileType = $_FILES['image']['type'];
+            $fileNameCmps = explode(".", $fileName);
+            $fileExtension = strtolower(end($fileNameCmps));
 
-        if ($stmt->execute()) {
-            $success = "Produk berhasil ditambahkan.";
-            header("Location: products.php?page=products");
-            exit();
-        } else {
-            $error = "Gagal menambahkan produk: " . $conn->error;
+            $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            if (in_array($fileExtension, $allowedfileExtensions)) {
+                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+
+                $uploadFileDir = '../uploads/';
+                if (!is_dir($uploadFileDir)) {
+                    mkdir($uploadFileDir, 0755, true);
+                }
+                $dest_path = $uploadFileDir . $newFileName;
+
+                if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                    $image_url = 'uploads/' . $newFileName;
+                } else {
+                    $error = "Terjadi kesalahan saat mengupload gambar.";
+                }
+            } else {
+                $error = "Format file tidak didukung. Gunakan jpg, jpeg, png, atau gif.";
+            }
+        }
+
+        if (!$error) {
+            $sql = "INSERT INTO crud_041_book (seller_id, title, genre, price, stock, image_url, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("issdiss", $seller_id, $title, $jenis, $price, $stock, $image_url, $description);
+
+            if ($stmt->execute()) {
+                $success = "Produk berhasil ditambahkan.";
+                header("Location: products.php?page=products");
+                exit();
+            } else {
+                $error = "Gagal menambahkan produk: " . $conn->error;
+            }
         }
     }
 }
@@ -65,9 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: 600;
             display: block;
             margin-bottom: 6px;
-            color: #2e7d32; /* hijau kehitaman */
+            color: #2e7d32;
         }
-        select, input[type="text"], input[type="number"] {
+        select, input[type="text"], input[type="number"], input[type="file"], textarea {
             border-radius: 8px;
             border: 2px solid #4caf50;
             padding: 10px 14px;
@@ -77,10 +110,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: border-color 0.3s;
             background-color: #fff;
         }
-        select:focus, input:focus {
+        select:focus, input:focus, textarea:focus {
             outline: none;
             border-color: #2d7a2d;
             box-shadow: 0 0 6px #2d7a2d;
+        }
+        textarea {
+            resize: vertical;
         }
         .btn-primary {
             background-color: #4caf50;
@@ -137,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
     <?php endif; ?>
 
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title">Nama Produk</label>
             <input type="text" id="title" name="title" required value="<?= htmlspecialchars($_POST['title'] ?? '') ?>" />
@@ -163,9 +199,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" id="stock" name="stock" min="0" required value="<?= htmlspecialchars($_POST['stock'] ?? '') ?>" />
         </div>
 
+        <div class="mb-3">
+            <label for="description">Deskripsi Produk</label>
+            <textarea id="description" name="description" rows="4"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="image">Gambar Produk</label>
+            <input type="file" id="image" name="image" accept="image/*" />
+        </div>
+
         <div class="form-actions">
             <a href="dashboard_seller.php?page=products" class="btn btn-secondary">Kembali</a>
-            <button href="dashboard_seller.php?page=products" type="submit" class="btn btn-primary">Tambah Produk</button>
+            <button type="submit" class="btn btn-primary">Tambah Produk</button>
         </div>
     </form>
 </div>

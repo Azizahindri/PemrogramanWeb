@@ -27,7 +27,7 @@ $result = $stmt->get_result();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: #e9f5e9; /* hijau muda */
+            background-color: #e9f5e9;
             font-family: Arial, sans-serif;
         }
         .container-fluid {
@@ -36,7 +36,7 @@ $result = $stmt->get_result();
             padding: 20px;
         }
         h2 {
-            color: #2f6d2f; /* hijau tua */
+            color: #2f6d2f;
             margin-bottom: 20px;
             font-weight: 700;
         }
@@ -51,7 +51,8 @@ $result = $stmt->get_result();
         .product-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 25px;
+            justify-items: center;
         }
         @media (max-width: 992px) {
             .product-grid {
@@ -66,46 +67,62 @@ $result = $stmt->get_result();
         .product-card {
             background: white;
             border: 2px solid #4caf50;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 2px 5px rgba(76, 175, 80, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: box-shadow 0.3s ease;
-            cursor: default;
+            font-size: 0.8rem;
+            width: 200px;
+            height: 450px;
+            margin: 0 auto;
+            overflow: hidden;
         }
         .product-card:hover {
-            box-shadow: 0 4px 16px rgba(76, 175, 80, 0.5);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5);
         }
         .product-card h5 {
-            margin-bottom: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #2f6d2f;
+            font-size: 1rem;
+            margin-bottom: 8px;
             text-align: center;
+            color: #2f6d2f;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .product-card img {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            background: #dcedc8;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: #fff;
         }
         .product-info {
-            font-size: 0.95rem;
             color: #3a5d3a;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             text-align: center;
+            padding: 0 6px;
+            line-height: 1.2em;
         }
         .product-info span {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+        }
+        .product-description {
+            text-align: justify;
+            padding: 0 6px;
+            font-size: 0.75rem;
+            color: #555;
+            line-height: 1.2em;
+            margin-bottom: 10px;
         }
         .btn-group {
+            margin-top: auto;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
         }
         .btn-group a {
@@ -113,6 +130,7 @@ $result = $stmt->get_result();
             text-align: center;
             font-weight: 600;
             padding: 6px 0;
+            font-size: 0.85rem;
         }
         .btn-warning {
             background-color: #8bc34a;
@@ -153,14 +171,18 @@ $result = $stmt->get_result();
                 <?php if (!empty($row['image_url'])): ?>
                     <img src="../<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                 <?php else: ?>
-                    <div style="width:100%; height:180px; background:#c8e6c9; display:flex; align-items:center; justify-content:center; color:#4caf50; border-radius:8px;">
+                    <div style="width:100%; height:140px; background:#c8e6c9; display:flex; align-items:center; justify-content:center; color:#4caf50; border-radius:6px;">
                         Tidak ada gambar
                     </div>
                 <?php endif; ?>
 
                 <div class="product-info">
                     <span><strong>Harga:</strong> Rp <?= number_format($row['price'], 0, ',', '.') ?></span>
-                    <span><strong>Stok:</strong> <?= htmlspecialchars($row['stock']) ?></span>
+                    <span><strong>Stok:</strong> <?= htmlspecialchars($row['stock'] ?? 0) ?></span>
+                </div>
+
+                <div class="product-description">
+                    <?= nl2br(htmlspecialchars($row['description'] ?? '')) ?>
                 </div>
                 
                 <div class="btn-group">
