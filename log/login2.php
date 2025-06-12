@@ -51,101 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Login | Freshure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg,rgb(35, 122, 86),rgb(221, 235, 223));
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-        }
-
-        .login-box {
-            background: #fff;
-            padding: 50px 40px;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 420px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .login-box h2 {
-            margin-bottom: 30px;
-            color: #2f7f5e;
-            font-weight: 700;
-        }
-
-        .form-label {
-            font-weight: 600;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            padding: 12px;
-            border: 1.5px solid #ccc;
-            transition: 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: #2f7f5e;
-            box-shadow: 0 0 0 0.2rem rgba(47, 127, 94, 0.25);
-        }
-
-        .btn-login {
-            background-color: #2f7f5e;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            color: #fff;
-            font-weight: 600;
-            width: 100%;
-            transition: background 0.3s;
-        }
-
-        .btn-login:hover {
-            background-color: #249e72;
-        }
-
-        .footer-text {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.95rem;
-            color: #666;
-        }
-
-        .footer-text a {
-            color: #2f7f5e;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .footer-text a:hover {
-            text-decoration: underline;
-        }
-
-        .icon-box {
-            text-align: center;
-            font-size: 48px;
-            color: #2f7f5e;
-            margin-bottom: 15px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <link href="../css/stylelogin.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -166,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit" class="btn btn-login">Masuk</button>
     </form>
     <div class="footer-text mt-3">
-        Belum punya akun? <a href="log/signup.php">Daftar sekarang</a>
+        Belum punya akun? <a href="signup.php">Daftar sekarang</a>
     </div>
 </div>
 

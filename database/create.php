@@ -7,10 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $review = $_POST['review'];
     $rating = $_POST['rating'];
     $date = $_POST['date'];
+    $user_id = $_POST['user_id'];
 
-    if (!empty($name) && !empty($book_id) && !empty($review) && !empty($rating) && !empty($date)) {
-        $sql = "INSERT INTO crud_041_book_reviews (name, book_id, review, rating, date) 
-                VALUES ('$name', '$book_id', '$review', '$rating', '$date')";
+    if (!empty($name) && !empty($book_id) && !empty($review) && !empty($rating) && !empty($date) && !empty($user_id)) {
+        $sql = "INSERT INTO crud_041_book_reviews (name, book_id, review, rating, date, user_id) 
+                VALUES ('$name', '$book_id', '$review', '$rating', '$date', '$user_id')";
 
         if ($conn->query($sql) === TRUE) {
             header("Location: ../thanks.php");  

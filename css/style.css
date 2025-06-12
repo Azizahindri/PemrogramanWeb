@@ -1,63 +1,63 @@
 /* ================= FORM REVIEW ================= */
 body.form-page {
-    background-color: rgb(28, 79, 45);
-    font-family: 'Poppins', sans-serif;
+  background-color: rgb(28, 79, 45);
+  font-family: 'Poppins', sans-serif;
 }
 
 body.form-page .header {
-    text-align: center;
-    color: rgb(255, 255, 255);
-    margin-top: 30px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin-top: 30px;
 }
 
 body.form-page .header h1 {
-    font-size: 72px;
-    font-weight: bold;
+  font-size: 72px;
+  font-weight: bold;
 }
 
 body.form-page .header p {
-    font-size: 18px;
-    margin-top: 10px;
+  font-size: 18px;
+  margin-top: 10px;
 }
 
 body.form-page hr {
-    border: 1px solid #fff;
+  border: 1px solid #fff;
 }
 
 body.form-page .container {
-    max-width: 600px;
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
+  max-width: 600px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
 }
 
 body.form-page .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 body.form-page .rating {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    direction: row;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  direction: row;
 }
 
 body.form-page .rating input {
-    display: none;
+  display: none;
 }
 
 body.form-page .rating label {
-    font-size: 35px;
-    color: #ccc;
-    cursor: pointer;
+  font-size: 35px;
+  color: #ccc;
+  cursor: pointer;
 }
 
-body.form-page .rating input:checked ~ label,
+body.form-page .rating input:checked~label,
 body.form-page .rating label:hover,
-body.form-page .rating label:hover ~ label {
-    color: #ffcc00; 
+body.form-page .rating label:hover~label {
+  color: #ffcc00;
 }
 
 /* Style tombol khusus form */
@@ -65,235 +65,262 @@ body.form-page input[type="button"],
 body.form-page input[type="submit"],
 body.form-page input[type="reset"],
 body.form-page a.btn {
-    margin-right: 10px;
-    margin-top: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 
 /* ================= REVIEW PAGE ================= */
 /* CSS khusus untuk halaman review dengan body class review-page */
 body.review-page {
-    background: linear-gradient(135deg, #72bd7e, #0a5711);
-    font-family: 'Segoe UI', sans-serif;
-    color: #fff;
+  background: linear-gradient(135deg, #72bd7e, #89bb7c);
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
 }
 
 body.review-page .container {
-    margin-top: 60px;
-    max-width: 800px;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 12px;
+  margin-top: 60px;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
 }
 
 body.review-page .intro {
-    color: #e0e0e0;
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 20px;
+  color: #e0e0e0;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 body.review-page #bookTitle {
-    font-size: 36px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: transparent;
-    background: linear-gradient(45deg, #fefefe, #f3d6ff); 
-    -webkit-background-clip: text;
-    text-align: center;
-    padding: 10px 0;
-    border-radius: 10px;
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: transparent;
+  background: linear-gradient(45deg, #fefefe, #f3d6ff);
+  -webkit-background-clip: text;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 10px;
 }
 
 body.review-page .card {
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    background-color: #fefefe;
-    color: #333;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: #fefefe;
+  color: #333;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 body.review-page .card:hover {
-    transform: scale(1.01);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 body.review-page .card-body {
-    padding: 20px;
-}
-
-body.review-page .review-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
-
-body.review-page .review-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-body.review-page .review-date {
-    font-size: 14px;
-    color: #999;
-}
-
-body.review-page .review-text {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #555;
-}
-
-body.review-page .review-rating {
-    font-size: 20px;
-    color: #f39c12;
-    margin-top: 8px;
-}
-
-body.review-page .review-actions {
-    margin-top: 15px;
-}
-
-body.review-page .btn-back {
-    text-align: center;
-    margin-top: 40px;
-}
-
-body.review-page .btn-back p {
-    font-size: 18px;
-    color: #fff;
-    font-weight: 600;
-}
-
-body.review-page .btn-back a {
-    color: #fff;
-}
-
-body.review-page .no-review {
-    color: #eee;
-    text-align: center;
-    margin-top: 20px;
-}
-/* === ABOUT PAGE === */
-/* style-about.css */
-
-body {
-  background-color: #f6fff8;
-  font-family: 'Segoe UI', sans-serif;
-  color: #2d6a4f;
-  margin: 0;
-}
-
-.navbar {
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.navbar-brand {
-  color: #2b9348 !important;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-.nav-link {
-  color: #2b9348 !important;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-link.active, .nav-link:hover {
-  color: #40916c !important;
-}
-
-.container {
-  max-width: 900px;
   padding: 20px;
 }
 
-.section-title {
-  color: #1b4332;
-  font-weight: 700;
-  font-size: 2rem;
-  margin-bottom: 25px;
+body.review-page .review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+body.review-page .review-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+body.review-page .review-date {
+  font-size: 14px;
+  color: #999;
+}
+
+body.review-page .review-text {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #555;
+}
+
+body.review-page .review-rating {
+  font-size: 20px;
+  color: #f39c12;
+  margin-top: 8px;
+}
+
+body.review-page .review-actions {
+  margin-top: 15px;
+}
+
+body.review-page .btn-back {
   text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 40px;
 }
 
-.about-section {
-  background-color: #e9f5ec;
-  padding: 30px 25px;
-  border-radius: 12px;
-  margin-bottom: 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+body.review-page .btn-back p {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 600;
 }
 
-.about-text {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  text-align: justify;
-  color: #2d6a4f;
+body.review-page .btn-back a {
+  color: #fff;
 }
 
-.team-member {
-  margin-bottom: 40px;
+body.review-page .no-review {
+  color: #eee;
+  text-align: center;
+  margin-top: 20px;
 }
 
-.team-member img {
-  border-radius: 50%;
-  width: 140px;
-  height: 140px;
+/* === informasi PAGE === */
+body.informasi-page {
+  background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+  font-family: 'Poppins', sans-serif;
+  color: #2e7d32;
+}
+
+body.informasi-page .container {
+  margin-top: 60px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+body.informasi-page .image-detail {
+  width: 100%;
+  height: 400px;
   object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
-  transition: transform 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.team-member img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+body.informasi-page .desc-box {
+  background-color: #f9fbe7;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.team-member h5 {
-  color: #1b4332;
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-}
-
-.team-member p {
-  color: #40916c;
+body.informasi-page h1.title {
+  color: #1b5e20;
   font-weight: 600;
-  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+body.informasi-page .btn {
+  margin-right: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+body.informasi-page .btn-success {
+  background-color: #43a047;
+  border: none;
+}
+
+body.informasi-page .btn-success:hover {
+  background-color: #388e3c;
+}
+
+body.informasi-page .btn-primary {
+  background-color: #2e7d32;
+  border: none;
+}
+
+body.informasi-page .btn-primary:hover {
+  background-color: #1b5e20;
+}
+
+body.informasi-page .btn-secondary {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+  border: none;
+}
+
+body.informasi-page .btn-secondary:hover {
+  background-color: #a5d6a7;
+}
+
+
+/* === ABOUT PAGE === */
+/* profile.css */
+/* === PROFILE PAGE === */
+body.profile-page {
+  font-family: 'Poppins', sans-serif; /* Sesuaikan dengan font umum di project */
+  background-color: #e6f2e6; /* Hijau muda cerah */
   margin: 0;
+  padding: 0;
+  color: #2e7d32; /* Warna teks hijau gelap */
 }
 
-footer {
-  background-color: #ffffff;
-  padding: 25px 20px;
+body.profile-page .container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  padding: 0 15px; /* Untuk responsif */
+}
+
+body.profile-page .card {
+  width: 400px;
+  max-width: 100%; /* agar responsif di layar kecil */
+  background-color: #fff; /* Putih bersih */
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 6px 15px rgba(34, 77, 34, 0.3);
+  border: 2px solid #4caf50; /* Garis hijau */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.profile-page .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(34, 77, 34, 0.5);
+}
+
+body.profile-page .card-title {
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
-  color: #40916c;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border-top: 1px solid #dbe9e2;
+  margin-bottom: 20px;
+  color: #2e7d32; /* Hijau tua */
 }
 
-footer a {
-  color: #1b4332;
-  text-decoration: none;
-  margin: 0 10px;
-  font-weight: 600;
+body.profile-page .card-text {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #3e6b3e; /* Hijau sedang */
+  margin-bottom: 15px;
 }
 
-footer a:hover {
-  text-decoration: underline;
-  color: #2b9348;
+body.profile-page .btn-danger {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto 0;
+  padding: 12px 28px;
+  background-color: #4caf50; /* Hijau utama */
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* jika pakai <a> */
 }
 
-
+body.profile-page .btn-danger:hover {
+  background-color: #388e3c; /* Hijau gelap saat hover */
+  box-shadow: 0 5px 15px rgba(56, 142, 60, 0.6);
+}
 
 
 
