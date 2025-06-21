@@ -2,15 +2,19 @@
 session_start();
 include '../database/db.php';
 
-// Cek apakah user adalah admin
+// Cek otorisasi admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../login2.php");
     exit();
 }
 
+$message = "";
+
 // Hapus pengguna
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user'])) {
     $id = $_POST['user_id'];
+
+    // Ambil role pengguna
     $stmt = $conn->prepare("SELECT role FROM users WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -19,15 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user'])) {
     $stmt->close();
 
     if ($_SESSION['user_id'] == $id) {
-        echo "<script>alert('Tidak bisa menghapus akun Anda sendiri.');</script>";
+        $message = "Akun Anda sendiri tidak dapat dihapus.";
     } elseif ($role_to_delete === 'admin') {
-        echo "<script>alert('Tidak bisa menghapus akun admin lain.');</script>";
+        $message = "Tidak dapat menghapus akun admin lain.";
     } else {
         $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $stmt->close();
-        echo "<script>alert('Pengguna berhasil dihapus.'); window.location.href='user_list.php';</script>";
+        $message = "Pengguna berhasil dihapus.";
     }
 }
 
@@ -38,68 +42,131 @@ $users = mysqli_query($conn, "SELECT id, first_name, last_name, email, role FROM
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Manajemen Pengguna</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <title>Manajemen Pengguna - Freshure</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
     <style>
         body {
-            padding: 30px;
-            background-color: #f4f4f4;
+            background: #f0f2f5;
             font-family: 'Segoe UI', sans-serif;
+            padding: 2rem 0;
         }
-        .card-box {
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+        .container {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .table th {
+            background-color: #2e7d32;
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .role-badge {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .badge-buyer {
+            background-color: #aed581;
+            color: #33691e;
+        }
+        .badge-seller {
+            background-color: #ffcc80;
+            color: #e65100;
+        }
+        .btn-delete {
+            background-color: #e53935;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.4rem 0.9rem;
+            border-radius: 0.4rem;
+        }
+        .btn-delete:hover {
+            background-color: #b71c1c;
+        }
+        .btn-back {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.3rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .btn-back:hover {
+            background-color: #1b5e20;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Manajemen Pengguna</h2>
 
-<h2>Manajemen Pengguna</h2>
+        <?php if ($message): ?>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <?= htmlspecialchars($message) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+            </div>
+        <?php endif; ?>
 
-<!-- Tabel User -->
-<div class="card-box">
-    <h4>Daftar Pengguna (Penjual & Pembeli)</h4>
-    <table class="table table-bordered table-striped mt-3">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Lengkap</th>
-                <th>Email</th>
-                <th>Peran</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (mysqli_num_rows($users) > 0): ?>
-                <?php $no = 1; while ($user = mysqli_fetch_assoc($users)): ?>
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
                     <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= htmlspecialchars($user['first_name'] . ' ' . $user['last_name']) ?></td>
-                        <td><?= htmlspecialchars($user['email']) ?></td>
-                        <td><?= ucfirst($user['role']) ?></td>
-                        <td>
-                            <form method="POST" action="" onsubmit="return confirm('Yakin ingin menghapus pengguna ini?');">
-                                <input type="hidden" name="delete_user" value="1">
-                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                            </form>
-                        </td>
+                        <th>No</th>
+                        <th>Nama Lengkap</th>
+                        <th>Email</th>
+                        <th>Peran</th>
+                        <th>Aksi</th>
                     </tr>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="5" class="text-center">Belum ada pengguna penjual atau pembeli.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
-</div>
+                </thead>
+                <tbody>
+                    <?php if (mysqli_num_rows($users) > 0): ?>
+                        <?php $no = 1; while ($user = mysqli_fetch_assoc($users)): ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= htmlspecialchars($user['first_name'] . ' ' . $user['last_name']) ?></td>
+                                <td><?= htmlspecialchars($user['email']) ?></td>
+                                <td>
+                                    <span class="role-badge badge 
+                                        <?= $user['role'] === 'buyer' ? 'badge-buyer' : 'badge-seller' ?>">
+                                        <?= htmlspecialchars($user['role']) ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <form method="POST" action="" onsubmit="return confirm('Yakin ingin menghapus pengguna ini?');">
+                                        <input type="hidden" name="delete_user" value="1" />
+                                        <input type="hidden" name="user_id" value="<?= $user['id'] ?>" />
+                                        <button type="submit" class="btn btn-delete" title="Hapus Pengguna">
+                                            <i class="fas fa-trash-alt me-1"></i> Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">Tidak ada pengguna selain admin.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
-<a href="dashboard_admin.php" class="btn btn-secondary">← Kembali ke Dashboard</a>
+        <div class="text-center mt-4">
+            <a href="dashboard_admin.php" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Kembali</a>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
