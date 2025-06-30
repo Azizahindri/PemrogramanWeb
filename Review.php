@@ -1,8 +1,9 @@
 <?php
+session_start(); 
 include 'database/db.php';
 
 if (!isset($_GET['id_book'])) {
-    echo "Sayur tidak ditemukan.";
+    echo "produk tidak ditemukan.";
     exit;
 }
 
@@ -15,7 +16,7 @@ $stmt->execute();
 $resultBook = $stmt->get_result();
 
 if ($resultBook->num_rows === 0) {
-    echo "Sayur tidak ditemukan.";
+    echo "produk tidak ditemukan.";
     exit;
 }
 
@@ -57,7 +58,7 @@ $resultReview = $stmtReview->get_result();
                     <p class="review-text"><strong>Review:</strong> <?= nl2br(htmlspecialchars($review['review'])) ?></p>
                     <p class="review-rating"><?= str_repeat("★", $review['rating']) . str_repeat("☆", 5 - $review['rating']) ?></p>
 
-                    <?php if (isset($_SESSION['user_id']) == $review['user_id']): ?>
+                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $review['user_id']): ?>
                         <div class="review-actions">
                             <a href="form.php?id=<?= urlencode($review['id']) ?>&id_book=<?= urlencode($id_book) ?>" class="btn btn-warning btn-sm">Edit</a>
                         </div>

@@ -83,6 +83,7 @@ $resultAllBook = mysqli_query($conn, $queryAllBook);
         <img src="<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['title']) ?>" />
         <h5><?= htmlspecialchars($row['title']) ?></h5>
         <p>Rp <?= number_format($row['price'],0,',','.') ?></p>
+        <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
       </div>
     <?php endwhile; ?>
   </div>

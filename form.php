@@ -24,7 +24,6 @@ if ($isEdit) {
         exit;
     }
 }
-// Ambil data user terbaru
 $stmt = $conn->prepare("SELECT id, first_name, last_name, email, role FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
