@@ -25,140 +25,18 @@ $result = $stmt->get_result();
     <meta charset="UTF-8" />
     <title>Daftar Produk Saya</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #e9f5e9;
-            font-family: Arial, sans-serif;
-        }
-        .container-fluid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h2 {
-            color: #2f6d2f;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        .btn-success {
-            background-color: #4caf50;
-            border-color: #4caf50;
-        }
-        .btn-success:hover {
-            background-color: #3a8c3a;
-            border-color: #3a8c3a;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            justify-items: center;
-        }
-        @media (max-width: 992px) {
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 576px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .product-card {
-            background: white;
-            border: 2px solid #4caf50;
-            border-radius: 8px;
-            padding: 8px;
-            box-shadow: 0 2px 5px rgba(76, 175, 80, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            width: 200px;
-            height: 450px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-        .product-card:hover {
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5);
-        }
-        .product-card h5 {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            text-align: center;
-            color: #2f6d2f;
-            font-weight: 700;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .product-card img {
-            width: 100%;
-            height: 140px;
-            object-fit: contain;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            background: #fff;
-        }
-        .product-info {
-            color: #3a5d3a;
-            margin-bottom: 8px;
-            text-align: center;
-            padding: 0 6px;
-            line-height: 1.2em;
-        }
-        .product-info span {
-            display: block;
-            margin-bottom: 4px;
-        }
-        .product-description {
-            text-align: justify;
-            padding: 0 6px;
-            font-size: 0.75rem;
-            color: #555;
-            line-height: 1.2em;
-            margin-bottom: 10px;
-        }
-        .btn-group {
-            margin-top: auto;
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-        }
-        .btn-group a {
-            flex: 1;
-            text-align: center;
-            font-weight: 600;
-            padding: 6px 0;
-            font-size: 0.85rem;
-        }
-        .btn-warning {
-            background-color: #8bc34a;
-            border-color: #8bc34a;
-            color: #fff;
-        }
-        .btn-warning:hover {
-            background-color: #7aa83d;
-            border-color: #7aa83d;
-            color: #fff;
-        }
-        .btn-danger {
-            background-color: #e53935;
-            border-color: #e53935;
-            color: #fff;
-        }
-        .btn-danger:hover {
-            background-color: #b71c1c;
-            border-color: #b71c1c;
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/products.css" />
+  
 </head>
 <body>
 
 <div class="container-fluid">
-    <h2>Daftar Produk Saya</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0">Daftar Produk Saya</h2>
+    </div>
+
     <a href="add_product.php" class="btn btn-success mb-4">Tambah Produk Baru</a>
+
 
     <?php if ($result->num_rows === 0): ?>
         <p>Belum ada produk yang kamu tambahkan.</p>
@@ -188,12 +66,16 @@ $result = $stmt->get_result();
                 <div class="btn-group">
                     <a href="edit_product.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                     <a href="delete_product.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus produk ini?')">Hapus</a>
+                    <a href="detail_product.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Detail</a>
                 </div>
             </div>
         <?php endwhile; ?>
     </div>
     <?php endif; ?>
 </div>
-
+<!-- Tombol kembali di bagian bawah sebelum footer -->
+<div class="text-center mt-5 mb-4">
+    <a href="dashboard_seller.php" class="btn btn-link text-primary fw-bold">⟵ Kembali ke Dashboard</a>
+</div>
 </body>
 </html>

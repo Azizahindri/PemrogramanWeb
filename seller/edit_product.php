@@ -93,65 +93,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <title>Edit Produk</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body { background-color: #e9f5e9; font-family: Arial, sans-serif; }
-        .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 8px; border: 2px solid #4caf50; box-shadow: 0 2px 8px rgba(76,175,80,0.3);}
-        h2 { color: #2f6d2f; font-weight: 700; margin-bottom: 20px; text-align: center; }
-        label { font-weight: 600; color: #3a5d3a; }
-        .btn-primary { background-color: #4caf50; border-color: #4caf50; }
-        .btn-primary:hover { background-color: #3a8c3a; border-color: #3a8c3a; }
-        .btn-secondary { border-color: #4caf50; color: #4caf50; }
-        .btn-secondary:hover { background-color: #e9f5e9; color: #3a5d3a; }
-        .img-preview { width: 100%; height: 180px; object-fit: contain; border-radius: 6px; background: #fff; margin-bottom: 12px; border: 1px solid #4caf50; }
-    </style>
+    <link href="../css/edit_product.css" rel="stylesheet" />
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Edit Produk</h2>
+    <div class="container">
+        <h2>Edit Produk</h2>
 
-    <?php if ($error): ?>
-        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
-    <?php if ($success): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
+        <?php if ($error): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
+        <?php if ($success): ?>
+            <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
 
-    <form method="post" action="" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="title" class="form-label">Nama Produk</label>
-            <input type="text" name="title" id="title" class="form-control" required value="<?= htmlspecialchars($product['title']) ?>" />
-        </div>
+        <form method="post" action="" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Nama Produk</label>
+                <input type="text" name="title" id="title" class="form-control" required value="<?= htmlspecialchars($product['title']) ?>" />
+            </div>
 
-        <div class="mb-3">
-            <label for="price" class="form-label">Harga (Rp)</label>
-            <input type="number" name="price" id="price" class="form-control" required min="0" step="0.01" value="<?= htmlspecialchars($product['price']) ?>" />
-        </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Harga (Rp)</label>
+                <input type="number" name="price" id="price" class="form-control" required min="0" step="0.01" value="<?= htmlspecialchars($product['price']) ?>" />
+            </div>
 
-        <div class="mb-3">
-            <label for="stock" class="form-label">Stok</label>
-            <input type="number" name="stock" id="stock" class="form-control" required min="0" value="<?= htmlspecialchars($product['stock']) ?>" />
-        </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stok</label>
+                <input type="number" name="stock" id="stock" class="form-control" required min="0" value="<?= htmlspecialchars($product['stock']) ?>" />
+            </div>
 
-        <div class="mb-3">
-            <label for="description" class="form-label">Deskripsi Produk</label>
-            <textarea name="description" id="description" rows="4" class="form-control"><?= htmlspecialchars($product['description']) ?></textarea>
-        </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi Produk</label>
+                <textarea name="description" id="description" rows="4" class="form-control"><?= htmlspecialchars($product['description']) ?></textarea>
+            </div>
 
-        <div class="mb-3">
-            <label for="image" class="form-label">Gambar Produk (opsional)</label>
-            <?php if (!empty($product['image_url'])): ?>
-                <img src="../<?= htmlspecialchars($product['image_url']) ?>" alt="Preview Gambar" class="img-preview" />
-            <?php else: ?>
-                <div class="img-preview" style="display:flex; align-items:center; justify-content:center; color:#4caf50;">Tidak ada gambar</div>
-            <?php endif; ?>
-            <input type="file" name="image" id="image" accept=".jpg,.jpeg,.png,.gif" class="form-control mt-2" />
-        </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Gambar Produk (opsional)</label>
+                <?php if (!empty($product['image_url'])): ?>
+                    <img src="../<?= htmlspecialchars($product['image_url']) ?>" alt="Preview Gambar" class="img-preview" />
+                <?php else: ?>
+                    <div class="img-preview" style="display:flex; align-items:center; justify-content:center; color:#4caf50;">Tidak ada gambar</div>
+                <?php endif; ?>
+                <input type="file" name="image" id="image" accept=".jpg,.jpeg,.png,.gif" class="form-control mt-2" />
+            </div>
 
-        <a href="products.php?page=products" class="btn btn-secondary me-2">Kembali</a>
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-    </form>
-</div>
+            <a href="products.php?page=products" class="btn btn-secondary me-2">Kembali</a>
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        </form>
+    </div>
 
 </body>
 </html>
