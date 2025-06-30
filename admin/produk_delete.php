@@ -2,41 +2,43 @@
 session_start();
 include '../database/db.php';
 
-// Cek role admin
+// Cek apakah user login dan berperan sebagai admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../login2.php");
     exit();
 }
 
-// Pastikan parameter id dikirim
-if (!isset($_GET['id'])) {
-    echo "ID produk tidak ditemukan.";
+// Pastikan parameter ID dikirim melalui GET
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    echo "<script>alert('ID produk tidak valid.'); window.location.href='produk_list.php';</script>";
     exit();
 }
 
 $id = $_GET['id'];
 
-// Ambil data produk dulu untuk hapus gambar (jika perlu)
+// Ambil data produk berdasarkan ID untuk mendapatkan path gambar
 $stmtSelect = $conn->prepare("SELECT image_url FROM crud_041_book WHERE id_book = ?");
 $stmtSelect->bind_param("s", $id);
 $stmtSelect->execute();
 $result = $stmtSelect->get_result();
 
 if ($result->num_rows === 0) {
-    echo "Produk tidak ditemukan.";
+    echo "<script>alert('Produk tidak ditemukan.'); window.location.href='produk_list.php';</script>";
     exit();
 }
 
 $product = $result->fetch_assoc();
-$image_path = "../" . $product['image_url']; // path ke file gambar
+$image_path = "../" . $product['image_url']; // Path lengkap gambar
+
+$stmtSelect->close();
 
 // Hapus produk dari database
 $stmtDelete = $conn->prepare("DELETE FROM crud_041_book WHERE id_book = ?");
 $stmtDelete->bind_param("s", $id);
 
 if ($stmtDelete->execute()) {
-    // Hapus file gambar jika ada
-    if (file_exists($image_path)) {
+    // Hapus gambar jika file benar-benar ada
+    if (!empty($product['image_url']) && file_exists($image_path)) {
         unlink($image_path);
     }
 

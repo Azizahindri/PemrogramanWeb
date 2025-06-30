@@ -1,0 +1,97 @@
+body {
+    background-color: #f4f7f6;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    background-color:rgb(162, 210, 165);
+    color: white;
+    padding-top: 30px;
+}
+.sidebar h4 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: #1b5e20;
+}
+.content {
+    margin-left: 240px;
+    padding: 40px 30px;
+    max-width: calc(100% - 240px);
+    box-sizing: border-box;
+}
+.card-stat {
+    height: 160px;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    text-align: center;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+.card-stat:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+.card-stat .icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color:rgb(43, 165, 47);
+}
+.card-stat h5 {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+.card-stat h3 {
+    font-weight: 700;
+    color:rgb(12, 172, 20);
+    font-size: 32px;
+    margin: 0;
+}
+.chart-container {
+    background: white;
+    padding: 30px 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 50px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width: 768px) {
+    .row.g-3 > .col {
+        flex: 1 1 0;
+        max-width: 20%;
+    }
+}
+@media (max-width: 767px) {
+    .row.g-3 > .col {
+        max-width: 50%;
+        margin-bottom: 20px;
+    }
+}
+#adminChart {
+    width: 100% !important;
+    height: 350px !important;
+}

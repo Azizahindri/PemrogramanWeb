@@ -1,0 +1,139 @@
+/* style_seller.css */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color:#C1D8C3;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.topbar {
+    display: flex;
+    color: black; 
+    background-color: #f1f8e9;
+    padding: 10px 20px;
+    height: 60px;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+}
+.topbar h5 {
+    margin: 0;
+    flex-grow: 1;
+}
+.logout-top {
+    color: white;
+    background-color: #dc3545;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: auto;
+    transition: background-color 0.3s ease;
+}
+.logout-top:hover {
+    background-color: #ff4d4d;
+    color: white;
+}
+.sidebar {
+    position: fixed;
+    top:60px;
+    left: 0;
+    height: calc(100vh - 60px);
+    width: 220px;
+    background-color:#80AF81;
+    padding-top: 20px;
+    color: white;
+    overflow-y: auto;
+}
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-weight: 600;
+}
+.sidebar a:hover, .sidebar a.active {
+    background-color: #508D4E;
+}
+.content {
+    margin-left: 220px;
+    padding: 100px 30px 30px 30px;
+    flex: 1 0 auto;
+}
+.header {
+    margin-bottom: 30px;
+}
+.product-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+.kategori-produk {
+    padding: 20px;
+    text-align: center;
+    color: #33691e;
+}
+.kategori-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.kategori-slider {
+    display: flex;
+    overflow: hidden;
+    width: 290px;
+    scroll-behavior: smooth;
+}
+.kategori-card {
+    background-color: #f1f8e9;
+    color: #33691e;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 270px;
+    flex-shrink: 0;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-right: 20px;
+}
+.kategori-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.btn-prev, .btn-next {
+    background-color: #33691e;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+}
+.btn-prev:hover, .btn-next:hover {
+    background-color: #558b2f;
+}
+footer {
+    background-color: #f1f8e9;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    z-index: 1001;
+    flex-shrink: 0;
+}
