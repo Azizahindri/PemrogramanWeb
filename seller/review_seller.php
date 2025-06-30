@@ -34,57 +34,29 @@ $reviews = $stmt->get_result();
     <title>Review Produk Saya - <?= htmlspecialchars($seller_name) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #C1D8C3;
-            font-family: 'Poppins', sans-serif;
-            padding: 30px;
-        }
-        .review-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-        .rating {
-            color: #ffc107; /* warna kuning bintang */
-            font-size: 1.2rem;
-        }
-        header {
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        a.btn-back {
-            text-decoration: none;
-        }
-    </style>
+    <link href="../css/reviewseller.css" rel="stylesheet" />
 </head>
 <body>
+    <header>
+        <h2>Review Produk Saya</h2>
+        <a href="dashboard.php" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard</a>
+    </header>
 
-<header>
-    <h2>Review Produk Saya</h2>
-    <a href="dashboard.php" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard</a>
-</header>
-
-<?php if ($reviews->num_rows > 0): ?>
-    <?php while ($review = $reviews->fetch_assoc()): ?>
-        <div class="review-card">
-            <h5>Produk: <?= htmlspecialchars($review['title']) ?></h5>
-            <small>Oleh: <?= htmlspecialchars($review['name'] ?? 'Anonim') ?> | <?= date('d M Y', strtotime($review['date'])) ?></small>
-            <p><?= nl2br(htmlspecialchars($review['review'])) ?></p>
-            <div class="rating">
-                <?= str_repeat('<i class="fas fa-star"></i>', $review['rating']) ?>
-                <?= str_repeat('<i class="far fa-star"></i>', 5 - $review['rating']) ?>
-                <span class="ms-2">(<?= $review['rating'] ?>/5)</span>
+    <?php if ($reviews->num_rows > 0): ?>
+        <?php while ($review = $reviews->fetch_assoc()): ?>
+            <div class="review-card">
+                <h5>Produk: <?= htmlspecialchars($review['title']) ?></h5>
+                <small>Oleh: <?= htmlspecialchars($review['name'] ?? 'Anonim') ?> | <?= date('d M Y', strtotime($review['date'])) ?></small>
+                <p><?= nl2br(htmlspecialchars($review['review'])) ?></p>
+                <div class="rating">
+                    <?= str_repeat('<i class="fas fa-star"></i>', $review['rating']) ?>
+                    <?= str_repeat('<i class="far fa-star"></i>', 5 - $review['rating']) ?>
+                    <span class="ms-2">(<?= $review['rating'] ?>/5)</span>
+                </div>
             </div>
-        </div>
-    <?php endwhile; ?>
-<?php else: ?>
-    <p>Belum ada review untuk produk Anda.</p>
-<?php endif; ?>
-
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p>Belum ada review untuk produk Anda.</p>
+    <?php endif; ?>
 </body>
 </html>
