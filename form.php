@@ -3,7 +3,7 @@ session_start();
 include 'database/db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: log/login2.php");
     exit;
 }
 
@@ -24,7 +24,16 @@ if ($isEdit) {
         exit;
     }
 }
-
+// Ambil data user terbaru
+$stmt = $conn->prepare("SELECT id, first_name, last_name, email, role FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows === 0) {
+    echo "User tidak ditemukan.";
+    exit;
+}
+$user = $result->fetch_assoc();
 $queryBook = "SELECT * FROM crud_041_book";
 $result = mysqli_query($conn, $queryBook);
 ?>
@@ -48,10 +57,19 @@ $result = mysqli_query($conn, $queryBook);
 
 <div class="container">
     <form id="reviewForm" action="<?= $isEdit ? 'database/update.php' : 'database/create.php' ?>" method="POST">
-        <div class="form-group">
-            <label for="name">Nama:</label>
-            <input type="text" id="name" name="name" class="form-control" value="<?= $isEdit ? htmlspecialchars($review['name']) : '' ?>" required>
-        </div>
+<div class="form-group">
+    <label for="name">Nama:</label>
+    <!-- Field yang terlihat, tapi tidak bisa diubah -->
+    <input type="text" id="name_display" class="form-control"
+        value="<?= isset($_SESSION['first_name']) ? htmlspecialchars($user['first_name']) : '' ?>" disabled>
+
+    <!-- Field tersembunyi yang akan dikirim ke server -->
+    <input type="hidden" id="name" name="name"
+        value="<?= isset($_SESSION['first_name']) ? htmlspecialchars($user['first_name']) : '' ?>">
+
+        <input type="hidden" id="user_id" name="user_id"
+        value="<?= $_SESSION['user_id'] ?>">
+</div>
 
         <div class="form-group">
             <label for="book_title">Jenis Tumbuhan:</label>

@@ -21,8 +21,7 @@ if ($resultBook->num_rows === 0) {
 
 $book = $resultBook->fetch_assoc();
 
-// Ambil review dari sayur
-$queryReview = "SELECT id, name, review, rating, date FROM crud_041_book_reviews WHERE book_id = ? ORDER BY date DESC";
+$queryReview = "SELECT id, name, review, rating, date, user_id FROM crud_041_book_reviews WHERE book_id = ? ORDER BY date DESC";
 $stmtReview = $conn->prepare($queryReview);
 $stmtReview->bind_param("s", $id_book);
 $stmtReview->execute();
@@ -46,28 +45,31 @@ $resultReview = $stmtReview->get_result();
 
         <h3 id="bookTitle"><?= htmlspecialchars($book['title']) ?></h3>
 
-        <div class="mt-4">
-            <?php if ($resultReview->num_rows > 0): ?>
-                <?php while ($review = $resultReview->fetch_assoc()): ?>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="review-header">
-                                <div class="review-name"><?= htmlspecialchars($review['name']) ?></div>
-                                <div class="review-date"><?= date('d M Y', strtotime($review['date'])) ?></div>
-                            </div>
-                            <p class="review-text"><strong>Review:</strong> <?= nl2br(htmlspecialchars($review['review'])) ?></p>
-                            <p class="review-rating"><?= str_repeat("★", $review['rating']) . str_repeat("☆", 5 - $review['rating']) ?></p>
-
-                            <div class="review-actions">
-                                <a href="form.php?id=<?= urlencode($review['id']) ?>&id_book=<?= urlencode($id_book) ?>" class="btn btn-warning btn-sm">Edit</a>
-                            </div>
-                        </div>
+<div class="mt-4">
+    <?php if ($resultReview->num_rows > 0): ?>
+        <?php while ($review = $resultReview->fetch_assoc()): ?>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="review-header">
+                        <div class="review-name"><?= htmlspecialchars($review['name']) ?></div>
+                        <div class="review-date"><?= date('d M Y', strtotime($review['date'])) ?></div>
                     </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p class="no-review">Belum ada review untuk sayur ini.</p>
-            <?php endif; ?>
-        </div>
+                    <p class="review-text"><strong>Review:</strong> <?= nl2br(htmlspecialchars($review['review'])) ?></p>
+                    <p class="review-rating"><?= str_repeat("★", $review['rating']) . str_repeat("☆", 5 - $review['rating']) ?></p>
+
+                    <?php if (isset($_SESSION['user_id']) == $review['user_id']): ?>
+                        <div class="review-actions">
+                            <a href="form.php?id=<?= urlencode($review['id']) ?>&id_book=<?= urlencode($id_book) ?>" class="btn btn-warning btn-sm">Edit</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p class="no-review">Belum ada review untuk sayur ini.</p>
+    <?php endif; ?>
+</div>
+
 
         <div class="btn-back">
             <p>Ingin memberi review?</p>

@@ -1,47 +1,9 @@
 <?php
-include 'database/db.php';
+include 'layout/header.php';
 // Query buku hanya jika nanti dibutuhkan
 $query = "SELECT * FROM crud_041_book";
 $result = mysqli_query($conn, $query);
 ?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tentang Kami - Freshure</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body class="about-page">
-
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container">
-    <a class="navbar-brand" href="Beranda.php">Freshure</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="Beranda.php">Beranda</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="about.php" aria-current="page">Tentang Kami</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <div class="container my-5">
   <h2 class="section-title">Tentang Freshure</h2>
   <div class="about-section">
@@ -73,15 +35,5 @@ $result = mysqli_query($conn, $query);
   </div>
 </div>
 
-<footer>
-  <p>&copy; 2025 Freshure. Semua Hak Dilindungi.</p>
-  <p>
-    <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat &amp; Ketentuan</a>
-  </p>
-</footer>
+<?php include("layout/footer.php"); ?>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
-<?php $conn->close(); ?>

@@ -36,92 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Daftar | Freshure</title>
 
-    <!-- Bootstrap & Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="../css/stylesign.css" rel = "stylesheet"/>
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #26734d, #a1efbc);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
-
-        .signup-box {
-            background: #fff;
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 420px;
-            animation: slideUp 0.8s ease-in-out;
-        }
-
-        h2 {
-            text-align: center;
-            color: #2e7d5a;
-            font-weight: 700;
-            margin-bottom: 25px;
-        }
-
-        .form-label {
-            font-weight: 600;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            padding: 10px;
-            border: 1.5px solid #ccc;
-            font-size: 14px;
-        }
-
-        .form-control:focus {
-            border-color: #2e7d5a;
-            box-shadow: 0 0 0 0.2rem rgba(46, 125, 90, 0.25);
-        }
-
-        .btn-signup {
-            background-color: #2e7d5a;
-            border: none;
-            color: #fff;
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-
-        .btn-signup:hover {
-            background-color: #239b6c;
-        }
-
-        .footer-text {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            text-align: center;
-            color: #555;
-        }
-
-        .footer-text a {
-            color: #2e7d5a;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .footer-text a:hover {
-            text-decoration: underline;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
 </head>
 <body>
     <div class="signup-box">
