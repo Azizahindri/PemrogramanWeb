@@ -33,52 +33,8 @@ $full_name = $admin['first_name'] . ' ' . $admin['last_name'];
   <title>Profil Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <style>
-    body {
-        background-color: #f4f7f6;
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-    }
-    .profile-container {
-        max-width: 800px;
-        margin: 60px auto;
-        background: white;
-        border-radius: 16px;
-        padding: 40px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    }
-    .profile-container h2 {
-        font-weight: 600;
-        margin-bottom: 30px;
-        color: #2e7d32;
-    }
-    .profile-row {
-        margin-bottom: 20px;
-    }
-    .label {
-        font-weight: 500;
-        color: #555;
-    }
-    .value {
-        font-size: 16px;
-        color: #222;
-    }
-    .action-buttons {
-        margin-top: 30px;
-    }
-    .avatar-circle {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background-color: #c1d8c3;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 36px;
-        color: white;
-        margin-bottom: 20px;
-    }
-  </style>
+  <link href="../css_admin/profil_admin.css" rel="stylesheet" />
+
 </head>
 <body>
 

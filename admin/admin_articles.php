@@ -1,5 +1,5 @@
 <?php
-include '../database/db.php'; // sesuaikan path
+include '../database/db.php';
 
 // Hapus artikel jika diminta
 if (isset($_GET['delete'])) {
@@ -18,84 +18,57 @@ $result = mysqli_query($conn, "SELECT * FROM articles ORDER BY created_at DESC")
 <head>
     <meta charset="UTF-8">
     <title>Admin - Artikel Freshure</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f9f9f9;
-            padding: 30px;
-        }
-        h1 {
-            color: #2e7d32;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .btn {
-            padding: 8px 14px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            text-decoration: none;
-            margin: 5px;
-        }
-        .btn:hover {
-            background: #388e3c;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-        }
-        th {
-            background-color: #e0f2f1;
-            text-align: left;
-        }
-        .action {
-            display: flex;
-            gap: 10px;
-        }
-    </style>
+    <link href="../css_admin/admin_articles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Kelola Artikel Freshure</h1>
-<a href="create_article.php" class="btn">+ Tambah Artikel</a>
+<div class="container mt-5">
+    <h1 class="text-success mb-4 text-center">Kelola Artikel Freshure</h1>
 
-<?php if (mysqli_num_rows($result) > 0): ?>
-<table>
-    <thead>
-        <tr>
-            <th>Judul</th>
-            <th>URL</th>
-            <th>Dibuat</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-        <tr>
-            <td><?= htmlspecialchars($row['title']) ?></td>
-            <td><a href="<?= htmlspecialchars($row['url']) ?>" target="_blank">Lihat</a></td>
-            <td><?= $row['created_at'] ?></td>
-            <td class="action">
-                <a href="edit_article.php?id=<?= $row['id'] ?>" class="btn">Edit</a>
-                <a href="admin_articles.php?delete=<?= $row['id'] ?>" class="btn" onclick="return confirm('Yakin ingin menghapus artikel ini?')">Hapus</a>
-            </td>
-        </tr>
-        <?php endwhile; ?>
-    </tbody>
-</table>
-<?php else: ?>
-    <p>Tidak ada artikel.</p>
-<?php endif; ?>
+    <div class="mb-4 text-center">
+        <a href="create_article.php" class="btn btn-primary">+ Tambah Artikel</a>
+    </div>
+
+    <?php if (mysqli_num_rows($result) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-success">
+                <tr>
+                    <th>Judul</th>
+                    <th>URL</th>
+                    <th>Dibuat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['title']) ?></td>
+                    <td><a href="<?= htmlspecialchars($row['url']) ?>" target="_blank">Lihat</a></td>
+                    <td><?= $row['created_at'] ?></td>
+                    <td>
+                        <a href="edit_article.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="admin_articles.php?delete=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Yakin ingin menghapus artikel ini?')">Hapus</a>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php else: ?>
+        <p class="text-center text-muted">Tidak ada artikel.</p>
+    <?php endif; ?>
+
+    <div class="text-center mt-4">
+        <a href="dashboard_admin.php" class="btn btn-success"><i class="fas fa-arrow-left me-2"></i>Kembali ke Dashboard</a>
+    </div>
+</div>
+
+<!-- Bootstrap & Font Awesome -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

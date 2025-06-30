@@ -46,66 +46,8 @@ $users = mysqli_query($conn, "SELECT id, first_name, last_name, email, role FROM
     <title>Manajemen Pengguna - Freshure</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background: #f0f2f5;
-            font-family: 'Segoe UI', sans-serif;
-            padding: 2rem 0;
-        }
-        .container {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .table th {
-            background-color: #2e7d32;
-            color: white;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-        .role-badge {
-            font-weight: bold;
-            text-transform: capitalize;
-        }
-        .badge-buyer {
-            background-color: #aed581;
-            color: #33691e;
-        }
-        .badge-seller {
-            background-color: #ffcc80;
-            color: #e65100;
-        }
-        .btn-delete {
-            background-color: #e53935;
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 0.4rem 0.9rem;
-            border-radius: 0.4rem;
-        }
-        .btn-delete:hover {
-            background-color: #b71c1c;
-        }
-        .btn-back {
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.3rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .btn-back:hover {
-            background-color: #1b5e20;
-        }
-    </style>
+    <link href="../css_admin/user_list.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="container">

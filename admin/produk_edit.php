@@ -70,64 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Edit Produk - LEAFY</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            padding: 40px 0;
-        }
-        .form-container {
-            background: #fff;
-            max-width: 650px;
-            margin: auto;
-            padding: 30px 40px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            transition: box-shadow 0.3s ease;
-        }
-        .form-container:hover {
-            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-        }
-        h2 {
-            font-weight: 700;
-            color: #2e7d32;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        label {
-            font-weight: 600;
-            color: #388e3c;
-        }
-        .btn-primary {
-            background-color: #2e7d32;
-            border: none;
-            font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #1b5e20;
-        }
-        .btn-secondary {
-            font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 8px;
-        }
-        img.preview {
-            width: 150px;
-            height: auto;
-            margin-top: 15px;
-            border-radius: 12px;
-            border: 2px solid #a5d6a7;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            display: block;
-        }
-        input[type="file"] {
-            padding: 5px 0;
-        }
-    </style>
+    <link href="../css_admin/produk_edit.css" rel="stylesheet" />
+
 </head>
 <body>
 

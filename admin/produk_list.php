@@ -17,51 +17,20 @@ $result = mysqli_query($conn, "SELECT * FROM crud_041_book");
     <title>Manajemen Produk - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #f4f7f6;
-            font-family: 'Poppins', sans-serif;
-            padding: 40px;
-        }
-        .container-custom {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.07);
-        }
-        h2 {
-            font-weight: 600;
-            color: #2e7d32;
-            margin-bottom: 30px;
-        }
-        .table th {
-            background-color: #c1d8c3;
-            color: #333;
-        }
-        .table td, .table th {
-            vertical-align: middle;
-        }
-        .table img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-        .btn-sm {
-            font-size: 0.85rem;
-            padding: 4px 10px;
-        }
-        .btn-add {
-            background-color: #4caf50;
-            color: white;
-        }
-        .btn-add:hover {
-            background-color: #388e3c;
-        }
-    </style>
+
 </head>
 <body>
+
+<div class="sidebar">
+    <h4>Freshure</h4>
+    <a href="dashboard_admin.php" class="active"><i class="fas fa-home me-2"></i>Dashboard</a>
+    <a href="produk_list.php"><i class="fas fa-box me-2"></i>Produk</a>
+    <a href="user_list.php"><i class="fas fa-users me-2"></i>Pengguna</a>
+    <a href="admin_articles.php"><i class="fas fa-newspaper me-2"></i>Artikel</a>
+    <a href="admin_review_control.php"><i class="fas fa-comments me-2"></i>Review</a>
+    <a href="../log/logout_adminseller.php" class="text-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+    <link href="../css_admin/dashboard_admin.css" rel="stylesheet" />
+</div>
 
 <div class="container-custom">
     <h2><i class="fas fa-box me-2"></i>Manajemen Produk</h2>

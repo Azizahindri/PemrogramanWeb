@@ -18,44 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Tambah Artikel - Admin Freshure</title>
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f7fafc;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .container {
-            max-width: 600px;
-            margin-top: 60px;
-            background: white;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            color: #2f855a;
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-align: center;
-        }
-        .btn-primary {
-            background-color: #2f855a;
-            border-color: #2f855a;
-        }
-        .btn-primary:hover {
-            background-color: #276749;
-            border-color: #276749;
-        }
-        a.back-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: #2f855a;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        a.back-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link href="../css_admin/create_article.css" rel="stylesheet" />
+
 </head>
 <body>
 

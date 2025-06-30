@@ -45,41 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Tambah Produk - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #f4f7f6;
-            font-family: 'Poppins', sans-serif;
-            padding: 40px;
-        }
-        .form-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 16px;
-            max-width: 700px;
-            margin: auto;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-        }
-        h2 {
-            font-weight: 600;
-            color: #2e7d32;
-            margin-bottom: 30px;
-        }
-        label {
-            font-weight: 500;
-            color: #333;
-        }
-        .btn-submit {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-        }
-        .btn-submit:hover {
-            background-color: #388e3c;
-        }
-        .btn-back {
-            background-color: #e0e0e0;
-        }
-    </style>
+    <link href="../css_admin/produk_add.css" rel="stylesheet" />
+
 </head>
 <body>
 
