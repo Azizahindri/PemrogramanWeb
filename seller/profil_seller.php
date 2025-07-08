@@ -8,12 +8,11 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
 
 $seller_id = $_SESSION['user_id'];
 
-// Update profil jika disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $field = $_POST['field'] ?? '';
     $value = trim($_POST['value'] ?? '');
 
-    if (in_array($field, ['first_name', 'last_name', 'email', 'whatsapp'])) {
+    if (in_array($field, ['first_name', 'last_name', 'email'])) {
         $stmt = $conn->prepare("UPDATE users SET $field = ? WHERE id = ?");
         $stmt->bind_param("si", $value, $seller_id);
         $stmt->execute();
@@ -23,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Ambil data
-$stmt = $conn->prepare("SELECT first_name, last_name, email, whatsapp FROM users WHERE id = ?");
+$stmt = $conn->prepare("SELECT first_name, last_name, email FROM users WHERE id = ?");
 $stmt->bind_param("i", $seller_id);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
@@ -31,11 +30,9 @@ $user = $stmt->get_result()->fetch_assoc();
 $first_name = $user['first_name'];
 $last_name = $user['last_name'];
 $email = $user['email'];
-$whatsapp = trim($user['whatsapp']) !== '' ? $user['whatsapp'] : '-';
 
 $avatar_url = "https://ui-avatars.com/api/?name=" . urlencode($first_name . ' ' . $last_name) . "&background=4CAF50&color=fff";
 
-// Hitung produk dan review
 $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM crud_041_book WHERE seller_id = ?");
 $stmt->bind_param("i", $seller_id);
 $stmt->execute();
@@ -53,7 +50,6 @@ $total_reviews = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
 
 <link rel="stylesheet" href="../css/profilseller.css">
 
-<!-- WRAPPER -->
 <div class="container-center">
   <div class="profile-box">
     <div class="d-flex align-items-center mb-4">
@@ -75,7 +71,6 @@ $total_reviews = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
         'first_name' => $first_name,
         'last_name' => $last_name,
         'email' => $email,
-        'whatsapp' => $whatsapp
       ];
       foreach ($fields as $key => $value):
       ?>

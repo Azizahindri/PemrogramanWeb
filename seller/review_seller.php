@@ -11,7 +11,6 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
 $seller_id = $_SESSION['user_id'];
 $seller_name = $_SESSION['first_name'] ?? 'Penjual';
 
-// Ambil review produk yang dijual seller ini
 $sql = "
     SELECT r.*, p.title 
     FROM crud_041_book_reviews r
@@ -39,7 +38,7 @@ $reviews = $stmt->get_result();
 <body>
     <header>
         <h2>Review Produk Saya</h2>
-        <a href="dashboard.php" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard</a>
+        <a href="dashboard_seller.php" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard</a>
     </header>
 
     <?php if ($reviews->num_rows > 0): ?>

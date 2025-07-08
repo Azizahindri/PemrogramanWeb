@@ -17,20 +17,9 @@ $result = mysqli_query($conn, "SELECT * FROM crud_041_book");
     <title>Manajemen Produk - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-
+    <link href="../css_admin/produk_list.css" rel="stylesheet" />
 </head>
 <body>
-
-<div class="sidebar">
-    <h4>Freshure</h4>
-    <a href="dashboard_admin.php" class="active"><i class="fas fa-home me-2"></i>Dashboard</a>
-    <a href="produk_list.php"><i class="fas fa-box me-2"></i>Produk</a>
-    <a href="user_list.php"><i class="fas fa-users me-2"></i>Pengguna</a>
-    <a href="admin_articles.php"><i class="fas fa-newspaper me-2"></i>Artikel</a>
-    <a href="admin_review_control.php"><i class="fas fa-comments me-2"></i>Review</a>
-    <a href="../log/logout_adminseller.php" class="text-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
-    <link href="../css_admin/dashboard_admin.css" rel="stylesheet" />
-</div>
 
 <div class="container-custom">
     <h2><i class="fas fa-box me-2"></i>Manajemen Produk</h2>

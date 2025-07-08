@@ -31,7 +31,7 @@ $total_products = $products->num_rows;
 <header>
     <div class="topbar">
         <h5>Sistem Penjualan Hidroponik</h5>
-        <a href="../logout.php" class="logout-top">Logout</a>
+        <a href="../log/logout_adminseller.php" class="logout-top">Logout</a>
     </div>
 </header>
 
